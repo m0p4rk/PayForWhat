@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 m0p4rk
+# SPDX-License-Identifier: AGPL-3.0-only
+
+# Dependencies
+node_modules/
+
+# Framework and build output
+.next/
+out/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# Test output
+coverage/
+playwright-report/
+test-results/
+blob-report/
+
+# Hosting metadata
+.vercel/
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*-credentials.json
+service-account*.json
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

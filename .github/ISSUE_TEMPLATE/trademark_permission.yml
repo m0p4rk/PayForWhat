@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 m0p4rk
+# SPDX-License-Identifier: CC-BY-4.0
+
+name: Trademark permission request
+description: Ask about a proposed use of the PayForWhat name or marks.
+title: "[Trademark]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is public. Do not include confidential plans, personal data, or credentials.
+        Read TRADEMARKS.md before submitting a request.
+  - type: textarea
+    id: proposed-use
+    attributes:
+      label: Proposed use
+      description: Explain exactly how and where the name or mark would appear.
+    validations:
+      required: true
+  - type: input
+    id: project-url
+    attributes:
+      label: Project or organization URL
+      description: Link to the relevant project, organization, or draft if public.
+  - type: textarea
+    id: relationship
+    attributes:
+      label: Relationship statement
+      description:
+        Explain how users will be told whether the work is official, endorsed, or
+        independent.
+    validations:
+      required: true

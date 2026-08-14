@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 m0p4rk
+# SPDX-License-Identifier: CC-BY-4.0
+
+name: Bug report
+description: Report reproducible incorrect behavior.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include personal files, resume contents, credentials, or other sensitive data.
+        Report security issues through the private security advisory form.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest reproducible sequence using synthetic data.
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Version or revision
+      description: Release, commit, or deployment identifier.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, operating system, device, and relevant settings.
+    validations:
+      required: true

@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2026 m0p4rk
+# SPDX-License-Identifier: AGPL-3.0-only
+
+name: DCO
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review, edited]
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: dco-${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  signoff:
+    name: DCO policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # This trusted workflow may read untrusted commit objects, but it must never
+      # check out or execute pull-request code.
+      - name: Check out trusted base revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - name: Fetch pull request commits without checking them out
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: >-
+          git fetch --no-tags origin
+          "+refs/pull/${PR_NUMBER}/head:refs/remotes/origin/payforwhat-pr-${PR_NUMBER}"
+
+      - name: Mark DCO status as pending on the head commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: >-
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${HEAD_SHA}"
+          --raw-field state=pending --raw-field context=DCO --raw-field
+          description="Checking author-matched DCO trailers"
+
+      - name: Verify DCO sign-offs with trusted code
+        id: dco
+        continue-on-error: true
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/check-dco.mjs "${BASE_SHA}" "${HEAD_SHA}"
+
+      - name: Publish DCO status on the head commit
+        env:
+          DCO_OUTCOME: ${{ steps.dco.outcome }}
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "${DCO_OUTCOME}" = "success" ]; then
+            state="success"
+            description="All commits have author-matched DCO trailers"
+          else
+            state="failure"
+            description="One or more commits need an author-matched DCO trailer"
+          fi
+
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${HEAD_SHA}" \
+            --raw-field state="${state}" \
+            --raw-field context=DCO \
+            --raw-field description="${description}"
+
+      - name: Fail when DCO verification failed
+        if: steps.dco.outcome != 'success'
+        run: exit 1

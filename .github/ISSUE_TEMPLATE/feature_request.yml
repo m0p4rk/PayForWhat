@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 m0p4rk
+# SPDX-License-Identifier: CC-BY-4.0
+
+name: Tool or feature proposal
+description: Propose a focused improvement or one-time task.
+title: "[Proposal]: "
+labels:
+  - proposal
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Describe the real one-time task and who has it.
+    validations:
+      required: true
+  - type: textarea
+    id: current-options
+    attributes:
+      label: Current options
+      description:
+        Explain the existing friction with links to first-party evidence where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Free result
+      description: What complete and useful result should PayForWhat provide?
+    validations:
+      required: true
+  - type: dropdown
+    id: processing
+    attributes:
+      label: Expected processing
+      options:
+        - Entirely in the browser
+        - Requires a server
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Privacy, cost, and maintenance risks
+      description:
+        Identify sensitive data, remote services, recurring data updates, and compute
+        cost.
+    validations:
+      required: true

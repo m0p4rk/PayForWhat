@@ -1,0 +1,68 @@
+/*
+ * SPDX-FileCopyrightText: 2026 m0p4rk
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@import "tailwindcss";
+
+@theme {
+  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
+}
+
+:root {
+  --accent: #b43e27;
+  --canvas: #f5f0e7;
+  --ink: #1b1813;
+  --line: rgba(27, 24, 19, 0.18);
+  --muted: #655f55;
+  --panel: #fffdf8;
+  --status: #dce8c9;
+  --status-ink: #344321;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--canvas);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+label,
+select,
+input[type="file"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

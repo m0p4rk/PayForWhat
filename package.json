@@ -1,0 +1,28 @@
+{
+  "name": "payforwhat",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": "24.x",
+    "pnpm": ">=11.19.0 <12"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dco:test": "node scripts/test-dco.mjs",
+    "dev": "turbo run dev --filter=@payforwhat/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "licenses:check": "node scripts/check-license-metadata.mjs",
+    "lint": "turbo run lint",
+    "release:verify": "pnpm verify && node scripts/check-release-readiness.mjs",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "verify": "pnpm format:check && pnpm dco:test && turbo run lint typecheck test build && pnpm licenses:check"
+  },
+  "devDependencies": {
+    "prettier": "3.9.6",
+    "turbo": "2.10.9"
+  }
+}
