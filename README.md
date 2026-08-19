@@ -113,7 +113,9 @@ The [technology decision](docs/architecture/stack.md) uses one Next.js applicati
 Vercel and defers databases, authentication, and server compute until a tool genuinely
 requires them.
 
-There is no production release yet.
+The site is deployed at [payforwhat.tech](https://payforwhat.tech) so the work is
+visible while it is built. Nothing there is released yet: tool pages stay out of search
+until they meet the accuracy, privacy, and quality gates above.
 
 ## Contributing
 
