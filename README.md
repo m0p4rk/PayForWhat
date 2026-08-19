@@ -5,6 +5,8 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # PayForWhat
 
+**English** · [한국어](README.ko.md)
+
 > **Solve the task. Skip the subscription.**
 
 A five-minute task should not turn into a subscription you forget for months or years.
