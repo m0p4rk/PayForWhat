@@ -21,6 +21,7 @@ an official source.
 ## Index
 
 - [Technology Stack](architecture/stack.md)
+- [Add a Tool](contributing/add-a-tool.md)
 - [First Tool: Image Resizer](product/first-tool.md)
 - [Planned Tool: Local Resume Builder](product/resume-builder.md)
 - [Release License Checklist](legal/release-license-checklist.md)

@@ -48,3 +48,12 @@ body:
         cost.
     validations:
       required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: How we know the result is correct
+      description:
+        Name the checks that prove the output is trustworthy, including the edge cases
+        worth failing on.
+    validations:
+      required: true

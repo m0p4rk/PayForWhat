@@ -19,6 +19,12 @@ playwright-report/
 test-results/
 blob-report/
 
+# Private strategy notes (never published)
+private/
+
+# Local agent and editor configuration
+.claude/
+
 # Hosting metadata
 .vercel/
 

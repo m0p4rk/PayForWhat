@@ -8,6 +8,19 @@ SPDX-License-Identifier: CC-BY-4.0
 PayForWhat welcomes focused contributions that advance its promise: useful results
 without subscriptions, artificial restrictions, or hidden privacy costs.
 
+## Where to start
+
+- **Adding a tool?** [docs/contributing/add-a-tool.md](docs/contributing/add-a-tool.md)
+  walks through the whole path — manifest, logic, tests, interface, pull request — in
+  about fifteen minutes for a simple local tool.
+- **First time here?** Issues labeled
+  [`good first issue`](https://github.com/m0p4rk/PayForWhat/labels/good%20first%20issue)
+  are scoped to finish in one sitting.
+- **Found something wrong?** A failing edge case as a test, an accessibility fix, or a
+  correction to documentation is a real contribution. It does not need a proposal first.
+
+The rest of this document is the rules that apply to every change.
+
 ## Before starting
 
 - Search open issues and pull requests for related work.
@@ -44,6 +57,16 @@ npm run verify
 
 Do not bypass a failed check. Explain platform-specific failures in the pull request if
 they cannot be reproduced locally.
+
+## Branches and pull requests
+
+`main` is the deployed production branch. It does not accept direct pushes; every change
+arrives through a pull request that passes review and the verification workflow.
+
+Contributors without write access — everyone outside the maintainer group — fork the
+repository, branch there, and open the pull request from the fork. Name branches for
+what they do: `tool/color-contrast-checker`, `fix/resizer-clipboard`,
+`docs/browser-support`.
 
 ## Pull request expectations
 

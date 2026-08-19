@@ -20,6 +20,23 @@ We plan to fund the official hosted service with clearly separated advertising. 
 make money from ads, not from your forgetfulness. Advertisers can cover the bill. **You
 keep your money.**
 
+## Why this is built with other people
+
+A first working version of a small tool comes together quickly now. The distance from
+"it runs" to something worth handing a stranger — edge cases, tests, accessibility,
+verification — is the actual work, and it is where most solo attempts quietly die. Work
+in this project has been deleted rather than shipped for exactly that reason, most
+recently a PDF editor that took two months.
+
+So the catalog is open rather than closed. Build a tool and bring it: hosting costs you
+nothing, the review is done with you, and your name goes on it and stays there. For some
+people that is a portfolio piece with a live URL; for others it is the pull-request and
+review experience that is hard to get on your own.
+
+[How to add a tool](docs/contributing/add-a-tool.md) walks the whole path, and
+[good first issues](https://github.com/m0p4rk/PayForWhat/labels/good%20first%20issue)
+are smaller ways in.
+
 ## The promise
 
 These are the rules we are building toward:
@@ -104,6 +121,18 @@ PayForWhat uses a founder-led, curated collaboration model. Read
 [CONTRIBUTING.md](CONTRIBUTING.md), [GOVERNANCE.md](GOVERNANCE.md), and the
 [Code of Conduct](CODE_OF_CONDUCT.md) before proposing work. Vulnerabilities must follow
 the private process in [SECURITY.md](SECURITY.md).
+
+Building a tool is the most direct way in:
+[docs/contributing/add-a-tool.md](docs/contributing/add-a-tool.md) covers the path from
+manifest to pull request.
+
+Two things are true for anyone who builds one:
+
+- **We host it, at no cost to you.** A tool that runs in the browser adds a page, not a
+  server bill, so there is nothing to pass on. Tools that need server compute are a
+  separate conversation about who pays for it, held in the issue before the work starts.
+- **Your name stays on it.** The catalog records an `owner` for every tool, and that
+  credit belongs to whoever built it.
 
 ## Open-source policy
 
