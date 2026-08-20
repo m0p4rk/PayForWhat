@@ -8,23 +8,34 @@ import Link from "next/link";
 import { ArrowRightIcon, ImageSquareIcon } from "@phosphor-icons/react/ssr";
 
 import { SiteHeader } from "@/components/site/site-header";
+import { getMessages, getToolCopy } from "@/lib/i18n/messages";
+import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n/locales";
 import { firstTool } from "@/lib/tools/catalog";
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const messages = getMessages(locale);
+
   if (!firstTool) {
     return null;
   }
 
-  const firstToolHref = `/en/tools/${firstTool.slug}` as Route;
+  const tool = getToolCopy(locale, firstTool);
+  const firstToolHref = `/${locale}/tools/${firstTool.slug}` as Route;
 
   return (
     <main className="min-h-[100dvh] bg-[var(--canvas)] text-[var(--ink)]">
       <div className="mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col px-6 py-6 sm:px-10 lg:px-16">
-        <SiteHeader />
+        <SiteHeader locale={locale} />
 
         <section className="border-y border-[var(--line)] py-7 sm:py-9">
           <h1 className="text-balance text-[clamp(1.55rem,3.35vw,3.1rem)] font-semibold leading-none tracking-[-0.05em] md:whitespace-nowrap">
-            A five-minute task should not become a subscription.
+            {messages.home.headline}
           </h1>
         </section>
 
@@ -35,14 +46,14 @@ export default function HomePage() {
                 <ImageSquareIcon aria-hidden="true" size={28} weight="regular" />
               </span>
               <h2 className="mt-8 text-3xl font-semibold tracking-[-0.04em]">
-                {firstTool.name}
+                {tool.name}
               </h2>
-              <p className="mt-4 leading-7 text-[var(--muted)]">{firstTool.summary}</p>
+              <p className="mt-4 leading-7 text-[var(--muted)]">{tool.summary}</p>
               <Link
                 className="group mt-10 inline-flex min-h-12 w-full items-center justify-between rounded-full bg-[var(--accent)] px-5 text-sm font-semibold text-white transition-[background-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#963522] active:translate-y-px active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                 href={firstToolHref}
               >
-                Resize an image
+                {messages.home.openTool}
                 <ArrowRightIcon
                   aria-hidden="true"
                   className="transition-transform duration-300 ease-out group-hover:translate-x-1"
@@ -55,9 +66,9 @@ export default function HomePage() {
         </section>
 
         <footer className="grid gap-4 border-t border-[var(--line)] py-6 text-sm text-[var(--muted)] sm:grid-cols-3">
-          <p>No subscriptions.</p>
-          <p className="sm:text-center">Open source.</p>
-          <p className="sm:text-right">Your data stays yours.</p>
+          <p>{messages.home.footerNoSubscription}</p>
+          <p className="sm:text-center">{messages.home.footerOpen}</p>
+          <p className="sm:text-right">{messages.home.footerPrivate}</p>
         </footer>
       </div>
     </main>

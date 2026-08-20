@@ -48,7 +48,7 @@ const catalogInput = [
     status: "building",
     slug: "image-resizer",
     owner: "m0p4rk",
-    supportedLocales: ["en"],
+    supportedLocales: ["en", "ko"],
     processingMode: "local",
     networkAccess: false,
     dataSensitivity: "sensitive",

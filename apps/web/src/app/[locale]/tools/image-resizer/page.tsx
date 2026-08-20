@@ -8,6 +8,9 @@ import { LockSimpleIcon } from "@phosphor-icons/react/ssr";
 
 import { ImageResizer } from "@/components/image-tools/image-resizer";
 import { SiteHeader } from "@/components/site/site-header";
+import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n/locales";
+import { getMessages, getToolCopy } from "@/lib/i18n/messages";
+import { firstTool } from "@/lib/tools/catalog";
 
 export const metadata: Metadata = {
   title: "Image Resizer",
@@ -19,20 +22,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ImageResizerPage() {
+export default async function ImageResizerPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const messages = getMessages(locale);
+  const tool = firstTool
+    ? getToolCopy(locale, firstTool)
+    : { name: "Image Resizer", summary: "" };
+
   return (
     <main className="min-h-[100dvh] bg-[var(--canvas)] text-[var(--ink)]">
       <div className="mx-auto w-full max-w-7xl px-5 py-5 sm:px-10 lg:px-16">
-        <SiteHeader bordered />
+        <SiteHeader bordered locale={locale} path="/tools/image-resizer" />
 
         <section className="py-9 sm:py-12">
           <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h1 className="text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">
-              Image Resizer
+              {tool.name}
             </h1>
             <p className="inline-flex items-center gap-2 text-sm text-[var(--muted)]">
               <LockSimpleIcon aria-hidden="true" size={17} weight="regular" />
-              Stays on your device
+              {messages.tool.staysOnDevice}
             </p>
           </div>
 
