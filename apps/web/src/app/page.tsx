@@ -7,7 +7,7 @@ import type { Route } from "next";
 import Link from "next/link";
 import { ArrowRightIcon, ImageSquareIcon } from "@phosphor-icons/react/ssr";
 
-import { getSourceUrl } from "@/lib/source";
+import { SiteHeader } from "@/components/site/site-header";
 import { firstTool } from "@/lib/tools/catalog";
 
 export default function HomePage() {
@@ -20,17 +20,7 @@ export default function HomePage() {
   return (
     <main className="min-h-[100dvh] bg-[var(--canvas)] text-[var(--ink)]">
       <div className="mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col px-6 py-6 sm:px-10 lg:px-16">
-        <header className="flex items-center justify-between pb-5">
-          <Link className="text-sm font-bold tracking-[-0.02em]" href="/">
-            PayForWhat
-          </Link>
-          <a
-            className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
-            href={getSourceUrl()}
-          >
-            GitHub
-          </a>
-        </header>
+        <SiteHeader />
 
         <section className="border-y border-[var(--line)] py-7 sm:py-9">
           <h1 className="text-balance text-[clamp(1.55rem,3.35vw,3.1rem)] font-semibold leading-none tracking-[-0.05em] md:whitespace-nowrap">

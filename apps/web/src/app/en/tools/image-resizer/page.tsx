@@ -4,11 +4,10 @@
  */
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { LockSimpleIcon } from "@phosphor-icons/react/ssr";
 
 import { ImageResizer } from "@/components/image-tools/image-resizer";
-import { getSourceUrl } from "@/lib/source";
+import { SiteHeader } from "@/components/site/site-header";
 
 export const metadata: Metadata = {
   title: "Image Resizer",
@@ -24,17 +23,7 @@ export default function ImageResizerPage() {
   return (
     <main className="min-h-[100dvh] bg-[var(--canvas)] text-[var(--ink)]">
       <div className="mx-auto w-full max-w-7xl px-5 py-5 sm:px-10 lg:px-16">
-        <header className="flex items-center justify-between border-b border-[var(--line)] pb-5">
-          <Link className="text-sm font-bold tracking-[-0.02em]" href="/">
-            PayForWhat
-          </Link>
-          <a
-            className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
-            href={getSourceUrl()}
-          >
-            GitHub
-          </a>
-        </header>
+        <SiteHeader bordered />
 
         <section className="py-9 sm:py-12">
           <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
