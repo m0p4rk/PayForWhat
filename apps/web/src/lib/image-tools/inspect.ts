@@ -26,7 +26,6 @@ function parseJpeg(bytes: Uint8Array, totalBytes: number): ImageInspection {
   let width = 0;
   let height = 0;
   let hasApplicationMetadata = false;
-  let isMultiPicture = false;
 
   while (offset + 3 < bytes.length) {
     while (offset < bytes.length && bytes[offset] !== 0xff) {
@@ -68,9 +67,14 @@ function parseJpeg(bytes: Uint8Array, totalBytes: number): ImageInspection {
       hasApplicationMetadata = true;
     }
 
+    // Multi-Picture Format (APP2/MPF) carries extra still images — a thumbnail,
+    // a depth map, the second lens — alongside the primary one. Phones write it
+    // constantly. It is application metadata, not animation: the primary image
+    // decodes normally and re-encoding simply drops the extras, which is what a
+    // resizer is expected to do. Treating it as animation rejected most phone
+    // photos outright.
     if (marker === 0xe2 && tag(bytes, offset + 2) === "MPF\u0000") {
       hasApplicationMetadata = true;
-      isMultiPicture = true;
     }
 
     if (JPEG_START_OF_FRAME_MARKERS.has(marker) && segmentLength >= 7) {
@@ -101,7 +105,8 @@ function parseJpeg(bytes: Uint8Array, totalBytes: number): ImageInspection {
     height,
     bytes: totalBytes,
     hasAlpha: false,
-    isAnimated: isMultiPicture,
+    // JPEG is a single-image format; nothing inside a .jpg animates.
+    isAnimated: false,
     hasApplicationMetadata,
   };
 }

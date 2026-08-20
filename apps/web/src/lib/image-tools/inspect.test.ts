@@ -122,10 +122,15 @@ describe("image header inspection", () => {
     });
   });
 
-  it("marks multi-picture JPEG containers as unsupported animation", () => {
+  // Regression: MPF used to be reported as animation, which made processing
+  // reject it outright. Phone cameras write MPF constantly, so that rejected
+  // most real photos before a preview could even render.
+  it("treats a multi-picture JPEG as metadata-bearing, not animated", () => {
     expect(inspectImageBytes(multiPictureJpegFixture())).toMatchObject({
       mime: "image/jpeg",
-      isAnimated: true,
+      width: 800,
+      height: 600,
+      isAnimated: false,
       hasApplicationMetadata: true,
     });
   });
